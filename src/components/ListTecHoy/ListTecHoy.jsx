@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Typography } from "@material-tailwind/react"
+import { useGetTecnicosQuery } from '../../redux/Api/firebase-api-main'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -9,6 +10,8 @@ function classNames(...classes) {
 
 export default function ListTecHoy() {
     const [selectTec, setSelectTec] = useState('Seleccione un tecnico')
+    const { data = [], isFetching } = useGetTecnicosQuery()
+    console.log(data)
     return (
         <div className="flex gap-4">
 

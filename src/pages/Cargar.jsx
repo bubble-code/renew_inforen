@@ -1,9 +1,10 @@
+import BarCargar from "../components/BarCargar/BarCargar";
 
 
 const Cargar = () => {
     return (
-        <div>
-            Cargar Page
+        <div className='py-6'>
+            <BarCargar />
         </div>
     )
 }
