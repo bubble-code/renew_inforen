@@ -35,8 +35,20 @@ export const firebaseApiMain = createApi({
                 }
             },
             invalidatesTags: [{ type: 'TecTag', id: 'List' }]
+        }),
+        updateTecnico: builder.mutation({
+            queryFn: async (data) => {
+                try {
+                    const response = await DataService.updateTecnico(data)
+                    return { data: response }
+                } catch (error) {
+                    console.log(error)
+                    return { data: error }
+                }
+            },
+            invalidatesTags: [{ type: 'TecTag', id: 'List' }]
         })
     }),
 })
 
-export const { useGetTecnicosQuery, useAddTecnicoMutation } = firebaseApiMain;
+export const { useGetTecnicosQuery, useAddTecnicoMutation, useUpdateTecnicoMutation } = firebaseApiMain;

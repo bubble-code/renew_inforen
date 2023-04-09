@@ -1,19 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import {
     Button,
     Dialog,
     Card,
-    CardHeader,
     CardBody,
     CardFooter,
     Typography,
-    Input,
-    Checkbox,
+    Input
 } from "@material-tailwind/react";
+import { useUpdateTecnicoMutation } from "../../redux/Api/firebase-api-main";
 
 export default function ModalEditTec({ open, setOpen }) {
+    const [updateTec, { isLoading }] = useUpdateTecnicoMutation()
     const dat = open.data
-    const handleOpen = () => setOpen({ isOpen: false, data: {} });
+    const handleOpen = () => {
+        updateTec(datTec)
+        setOpen({ isOpen: false, data: {} })
+    };
+
     const [datTec, setDatTec] = useState({})
 
     const handleOnchange = e => {
@@ -27,54 +31,33 @@ export default function ModalEditTec({ open, setOpen }) {
         setDatTec({
             ...dat
         })
-        console.log(datTec)
     }, [dat])
 
     return (
-        <React.Fragment>
-            <Dialog
-                size="xs"
-                open={open.isOpen}
-                handler={handleOpen}
-                className="shadow-none"
-            >
+        <Fragment>
+            <Dialog size="xs" open={open.isOpen} className="shadow-none">
                 <Card className="bg-slate-600 rounded-lg">
-                    <CardHeader
-                        variant="gradient"
-                        color="blue"
-                        className="mb-4 grid h-28 place-items-center"
-                    >
-                        <Typography variant="3" color="white" className='font-normal'>
+                    <CardBody className="flex flex-col gap-4">
+                        <Typography color="white" className='font-normal'>
                             {open.data.name}
                         </Typography>
-                    </CardHeader>
-                    <CardBody className="flex flex-col gap-4">
-                        <Input id="name" size="lg" className="text-white" value={datTec.name} onChange={(e) => { handleOnchange(e) }} />
-                        <Input label="Password" size="lg" />
-                        <div className="-ml-2.5">
-                            <Checkbox label="Remember Me" />
-                        </div>
+                        <Input id="name" size="lg" className="text-black bg-slate-300" value={datTec.name} onChange={(e) => { handleOnchange(e) }} />
+                        <Input id="lastName" size="lg" className="text-black bg-slate-300" value={datTec.lastName} onChange={(e) => { handleOnchange(e) }} />
+                        <Input id="phone" size="lg" className="text-black bg-slate-300" value={datTec.phone} onChange={(e) => { handleOnchange(e) }} />
+                        <Input id="email" size="lg" className="text-black bg-slate-300" value={datTec.email} onChange={(e) => { handleOnchange(e) }} />
+                        <Input id="rol" size="lg" className="text-black bg-slate-300" value={datTec.rol} onChange={(e) => { handleOnchange(e) }} />
+                        <Input id="status" size="lg" className="text-black bg-slate-300" value={datTec.status} onChange={(e) => { handleOnchange(e) }} />
                     </CardBody>
-                    <CardFooter className="pt-0">
-                        <Button variant="gradient" onClick={handleOpen} fullWidth>
-                            Sign In
+                    <CardFooter className="pt-0 flex justify-between content-between w-full">
+                        <Button onClick={handleOpen} className="px-6 py-2 shadow-md bg-slate-700 w-2/5 text-center font-extralight" >
+                            Save
                         </Button>
-                        <Typography variant="small" className="mt-6 flex justify-center">
-                            Don&apos;t have an account?
-                            <Typography
-                                as="a"
-                                href="#signup"
-                                variant="small"
-                                color="blue"
-                                className="ml-1 font-bold"
-                                onClick={handleOpen}
-                            >
-                                Sign up
-                            </Typography>
-                        </Typography>
+                        <Button onClick={() => setOpen({ isOpen: false, data: {} })} className="px-4 py-2 shadow-md bg-slate-700 w-2/5 text-center font-extralight" >
+                            Cancel
+                        </Button>
                     </CardFooter>
                 </Card>
             </Dialog>
-        </React.Fragment>
+        </Fragment>
     );
 }
