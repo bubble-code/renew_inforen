@@ -1,0 +1,4 @@
+#navbar a.active,
+#inicio a.active {
+    color: red;
+}

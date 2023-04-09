@@ -6,6 +6,7 @@ import Login from '../pages/Login'
 import Historial from '../pages/Historial'
 import Busqueda from '../pages/Busqueda'
 import ErrorPage from './error-page'
+import Tecnicos from '../pages/Tecnicos'
 
 
 export const router = createBrowserRouter([
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path: 'busqueda',
                 element: <Busqueda />
+            },
+            {
+                path: 'tecnicos',
+                element: <Tecnicos />
             }
         ]
     }

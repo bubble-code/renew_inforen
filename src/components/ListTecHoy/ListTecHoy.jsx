@@ -11,7 +11,27 @@ function classNames(...classes) {
 export default function ListTecHoy() {
     const [selectTec, setSelectTec] = useState('Seleccione un tecnico')
     const { data = [], isFetching } = useGetTecnicosQuery()
-    console.log(data)
+    const renderListTec = () => {
+        return data.map((item, key1) => (
+            <Menu.Item key={key1} >
+                {
+                    ({ active }) => {
+                        return <div onClick={() => setSelectTec(item.id)}>
+                            <Typography
+                                className={classNames(
+                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                    'block px-4 py-2 text-sm'
+                                )
+                                }
+                            >
+                                {`${item.name} ${item.lastName}`}
+                            </Typography>
+                        </div>
+                    }
+                }
+            </Menu.Item>
+        ))
+    }
     return (
         <div className="flex gap-4">
 
@@ -34,40 +54,7 @@ export default function ListTecHoy() {
                 >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="py-1">
-                            <Menu.Item  >
-                                {
-                                    ({ active }) => {
-                                        return <div onClick={() => setSelectTec('Alejandro')}>
-                                            <Typography
-                                                className={classNames(
-                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                    'block px-4 py-2 text-sm'
-                                                )
-                                                }
-                                            >
-                                                Alejandro
-                                            </Typography>
-                                        </div>
-                                    }
-                                }
-                            </Menu.Item>
-                            <Menu.Item>
-                                {
-                                    ({ active }) => {
-                                        return <div onClick={() => setSelectTec('Obregon')}>
-                                            <Typography
-                                                className={classNames(
-                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                    'block px-4 py-2 text-sm'
-                                                )
-                                                }
-                                            >
-                                                Obregon
-                                            </Typography>
-                                        </div>
-                                    }
-                                }
-                            </Menu.Item>
+                            {renderListTec()}
 
                         </div>
                     </Menu.Items>

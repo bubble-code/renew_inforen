@@ -6,7 +6,7 @@ import moment from "moment";
 class DataService {
     _pathComunidades = "/inforein";
     _collectionAgencias = "/CM/agencias/listagencias";
-    _collectionTecnicos = "/inforein/users/Tec";
+    _collectionTecnicos = "/inforein/tecnicos/tec";
     _pathCM = "/CM/cm/cm";
     _pathDxCode = "/dxCode";
     _pathService = "/CM/Services/Services";
@@ -24,8 +24,8 @@ class DataService {
         const collectionn = collection(db, `${this._collectionTecnicos}`);
         const querySnapShot = query(collectionn);
         const result = await getDocs(querySnapShot)
-        console.log(result)
-        return result.docs.map((item) => ({ label: item.id, pNumber: item.data()['pNumber'], sCode: item.data()['sCode'] }));
+        // console.log(result)
+        return result.docs.map((item) => ({ id: item.id, name: item.data()['name'], lastName: item.data()['lastName'], phone: item.data()['phone'], email: item.data()['email'], rol: item.data()['rol'], create: item.data()['create'], status: item.data()['status'] }));
     }
     // async getServices() {
     //     const collectionn = collection(db, `${this._pathService}`);
@@ -151,11 +151,16 @@ class DataService {
     //     await updateDoc(docRef, data);
     // }
 
-    // async addNewClient({ cm, data }) {
-    //     const { name, lastName } = data;
-    //     const docRef = doc(db, `${this._pathCM}/${cm}/activeClient/`, `${name} ${lastName}`);
-    //     await setDoc(docRef, data);
-    // }
+    async addNewClient({ name, lastName, phone, email, rol, create, status }) {
+        // const { name, lastName } = data;
+        // const docRef = doc(db, `${this._pathCM}/${cm}/activeClient/`, `${name} ${lastName}`);
+        // await setDoc(docRef, data);
+        // const { serviceDesx } = serviceDx;
+        const collRef = collection(db, `${this._collectionTecnicos}`);
+        const response = await addDoc(collRef, { name, lastName, phone, email, rol, create, status });
+        // console.log(response);
+        return { name, lastName, phone, email, rol, create, status };
+    }
     // async addNewDxCode({ dxData }) {
     //     try {
     //         const { dxCode, dxDesx } = dxData;

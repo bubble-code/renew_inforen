@@ -8,7 +8,8 @@ import {
     Button,
     IconButton,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import './style.css'
 
 export default function Navbar1() {
     const [openNav, setOpenNav] = useState(false);
@@ -20,17 +21,18 @@ export default function Navbar1() {
         );
     }, []);
 
+
     const navList = (
-        <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+        <nav className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6" id="navbar">
             <Typography
                 as="li"
                 variant="small"
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <Link className="flex items-center" to={'hoy'}>
+                <NavLink className="flex items-center" to={'hoy'}>
                     Hoy
-                </Link>
+                </NavLink>
             </Typography>
             <Typography
                 as="li"
@@ -38,9 +40,9 @@ export default function Navbar1() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <Link className="flex items-center" to={'historial'}>
+                <NavLink className="flex items-center" to={'historial'}>
                     Historial
-                </Link>
+                </NavLink>
             </Typography>
             <Typography
                 as="li"
@@ -48,9 +50,9 @@ export default function Navbar1() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <Link to={'cargar'} className="flex items-center">
+                <NavLink to={'cargar'} className="flex items-center">
                     Cargar
-                </Link>
+                </NavLink>
             </Typography>
             <Typography
                 as="li"
@@ -58,23 +60,33 @@ export default function Navbar1() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <Link to={'busqueda'} className="flex items-center">
+                <NavLink to={'busqueda'} className="flex items-center">
                     Busqueda
-                </Link>
+                </NavLink>
             </Typography>
-        </ul>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-normal"
+            >
+                <NavLink to={'tecnicos'} className="flex items-center" >
+                    Tecnicos
+                </NavLink>
+            </Typography>
+        </nav>
     );
 
     return (
         <Navbar className="py-2 px-4 lg:px-8 lg:py-4 text-gray-950">
-            <div className="container mx-auto flex items-center justify-between">
+            <nav className="container mx-auto flex items-center justify-between">
                 <Typography
                     as="a"
                     href="#"
                     variant="small"
                     className="mr-4 cursor-pointer py-1.5 font-normal"
                 >
-                    <Link to={'/home'}>Inicio</Link>
+                    <NavLink to={'/home'}>Inicio</NavLink>
                 </Typography>
                 <div className="hidden lg:block">{navList}</div>
                 <Button variant="gradient" size="sm" className="hidden lg:inline-block text-gray-950">
@@ -117,7 +129,7 @@ export default function Navbar1() {
                         </svg>
                     )}
                 </IconButton>
-            </div>
+            </nav>
             <MobileNav open={openNav}>
                 <div className="container mx-auto">
                     {navList}
