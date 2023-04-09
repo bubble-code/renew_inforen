@@ -6,10 +6,10 @@ const store = configureStore({
     reducer: {
         [firebaseApiMain.reducerPath]: firebaseApiMain.reducer
     },
-    devTools: process.env.NODE_ENV !== 'production',
+    // devTools: process.env.NODE_ENV !== 'production',
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
-    }).concat(firebaseApiMain.middleware)
+    }).concat(firebaseApiMain.middleware).concat(firebaseApiMain.middleware)
 })
 
 export default store;

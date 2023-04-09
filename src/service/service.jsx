@@ -146,14 +146,16 @@ class DataService {
     //     await deleteDoc(docRef);
     // }
 
-    //     async updateService({ cm, id, data }) {
-    //     const docRef = doc(db, `${this._pathCM}/${cm}/openBilling/`, `${id}`);
-    //     await updateDoc(docRef, data);
-    // }
+    async updateTecnico(data) {
+        const { id, name, lastName, phone, email, rol, create, status } = data
+        const docRef = doc(db, `${this._collectionTecnicos}`, `${id}`);
+        await updateDoc(docRef, { name, lastName, phone, email, rol, create, status });
+        return { id, name, lastName, phone, email, rol, create, status }
+    }
 
     async addNewClient({ name, lastName, phone, email, rol, create, status }) {
         // const { name, lastName } = data;
-        // const docRef = doc(db, `${this._pathCM}/${cm}/activeClient/`, `${name} ${lastName}`);
+        // const docRef = doc(db, `${ this._pathCM } / ${ cm } / activeClient / `, `${ name } ${ lastName }`);
         // await setDoc(docRef, data);
         // const { serviceDesx } = serviceDx;
         const collRef = collection(db, `${this._collectionTecnicos}`);
@@ -165,7 +167,7 @@ class DataService {
     //     try {
     //         const { dxCode, dxDesx } = dxData;
     //         const dxDescription = dxDesx.trim();
-    //         const docRef = doc(db, `${this._pathDxCode}`, `${dxCode}`);
+    //         const docRef = doc(db, `${ this._pathDxCode }`, `${ dxCode }`);
     //         await setDoc(docRef, { dxCode, dxDescription });
     //         return true;
 
@@ -178,7 +180,7 @@ class DataService {
     // async addNewService({ serviceDx }) {
     //     try {
     //         const { serviceDesx } = serviceDx;
-    //         const collRef = collection(db, `${this._pathService}`);
+    //         const collRef = collection(db, `${ this._pathService }`);
     //         await addDoc(collRef, { serviceDesx });
     //         return true;
 
@@ -195,7 +197,7 @@ class DataService {
     // #region GETS
     // async getServiceById({ cm, id }) {
     //     if (id) {
-    //         const docRef = doc(db, `${this._pathCM}/${cm}/openBilling/`, `${id}`);
+    //         const docRef = doc(db, `${ this._pathCM } / ${ cm } / openBilling / `, `${ id }`);
     //         const docSnap = await getDoc(docRef);
     //         // console.log(docSnap.data());
     //         if (docSnap.exists()) {
@@ -212,7 +214,7 @@ class DataService {
     // async totalUnits({ cm, day }) {
     //     let total = 0;
     //     try {
-    //         const conllectionn = collection(db, `${this._pathCM}/${cm}/openBilling/${day}/1`);
+    //         const conllectionn = collection(db, `${ this._pathCM } / ${ cm } / openBilling / ${ day } / 1`);
     //         const querySnapShot = query(conllectionn);
     //         const result = await getDocs(querySnapShot);
     //         result.docs.forEach((item) => {
@@ -226,7 +228,7 @@ class DataService {
     // }
 
     // async getClients({ cm }) {
-    //     const collectionn = collection(db, `${this._pathCM}/${cm}/activeClient`);
+    //     const collectionn = collection(db, `${ this._pathCM } / ${ cm } / activeClient`);
     //     const querySnapShot = query(collectionn);
     //     const result = await getDocs(querySnapShot)
     //     return result.docs.map((item) => {
@@ -237,7 +239,7 @@ class DataService {
     // // { id: item.id, label: item.data()['serviceDesx'], ...item.data() }
 
     // async listActivedClients({ cm }) {
-    //     const collectionn = collection(db, `${this._pathCM}/${cm}/activeClient`);
+    //     const collectionn = collection(db, `${ this._pathCM } / ${ cm } / activeClient`);
     //     const querySnapShot = query(collectionn);
     //     const result = await getDocs(querySnapShot)
     //     return result.docs;
@@ -272,7 +274,7 @@ class DataService {
     //     // console.log(listCMa);
     //     const prevResult = Promise.allSettled(listCMa.map(async (item) => {
     //         // console.log("item.id", item.label);
-    //         const collectionn = collection(db, `${this._pathCM}/${item.label}/openBilling`);
+    //         const collectionn = collection(db, `${ this._pathCM } / ${ item.label } / openBilling`);
     //         const querySnapShot = query(collectionn, where('status', '==', 'completed'));
     //         const result = await getDocs(querySnapShot);
     //         return result.docs;
