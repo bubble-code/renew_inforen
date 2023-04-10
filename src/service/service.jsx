@@ -141,10 +141,11 @@ class DataService {
     // #region CRUD Billings
 
 
-    // async deleteService({ cm, id }) {
-    //     const docRef = doc(db, `${this._pathCM}/${cm}/openBilling/`, `${id}`);
-    //     await deleteDoc(docRef);
-    // }
+    async deleteTecnico(id) {
+        const docRef = doc(db, `${this._collectionTecnicos}`, `${id}`);
+        const response = await deleteDoc(docRef);
+        return response
+    }
 
     async updateTecnico(data) {
         const { id, name, lastName, phone, email, rol, create, status } = data

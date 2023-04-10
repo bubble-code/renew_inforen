@@ -1,6 +1,11 @@
 import { Typography } from "@material-tailwind/react"
+import { useDeleteTecnicoMutation } from "../../redux/Api/firebase-api-main"
 
 const TableRenderTec = ({ data, setOpen }) => {
+    const [deleteTec, { isLoading }] = useDeleteTecnicoMutation()
+    const handleDelete = (tecItem) => {
+        deleteTec(tecItem)
+    }
     return (
         <div className="px-4 py-8 inline-block w-full text-left">
             <div className="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
@@ -19,6 +24,8 @@ const TableRenderTec = ({ data, setOpen }) => {
                                 </th>
                                 <th scope="col" className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">
                                     status
+                                </th>
+                                <th scope="col" className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">
                                 </th>
                                 <th scope="col" className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">
                                 </th>
@@ -61,6 +68,13 @@ const TableRenderTec = ({ data, setOpen }) => {
                                                 setOpen({ isOpen: true, data: item })
                                             }} className="text-indigo-600 hover:text-indigo-900">
                                                 Edit
+                                            </button>
+                                        </td>
+                                        <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                            <button onClick={() => {
+                                                handleDelete(item.id)
+                                            }} className="text-indigo-600 hover:text-indigo-900">
+                                                Delete
                                             </button>
                                         </td>
                                     </tr>

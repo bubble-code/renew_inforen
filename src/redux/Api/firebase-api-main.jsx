@@ -47,8 +47,20 @@ export const firebaseApiMain = createApi({
                 }
             },
             invalidatesTags: [{ type: 'TecTag', id: 'List' }]
+        }),
+        deleteTecnico: builder.mutation({
+            queryFn: async (id) => {
+                try {
+                    const response = await DataService.deleteTecnico(id)
+                    return { data: response }
+                } catch (error) {
+                    console.log(error)
+                    return { data: error }
+                }
+            },
+            invalidatesTags: [{ type: 'TecTag', id: 'List' }]
         })
     }),
 })
 
-export const { useGetTecnicosQuery, useAddTecnicoMutation, useUpdateTecnicoMutation } = firebaseApiMain;
+export const { useGetTecnicosQuery, useAddTecnicoMutation, useUpdateTecnicoMutation, useDeleteTecnicoMutation } = firebaseApiMain;

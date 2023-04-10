@@ -5,7 +5,7 @@ const Cargar = () => {
     
     return (
         <div className='py-6'>
-            <BarCargar />
+            <BarCargar /> 
         </div>
     )
 }
