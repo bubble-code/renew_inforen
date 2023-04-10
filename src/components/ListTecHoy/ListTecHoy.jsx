@@ -8,15 +8,17 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function ListTecHoy() {
-    const [selectTec, setSelectTec] = useState('Seleccione un tecnico')
+export default function ListTecHoy({ current }) {
     const { data = [], isFetching } = useGetTecnicosQuery()
+    const handleCurrentTec = (tec) => {
+        current(tec)
+    }
     const renderListTec = () => {
         return data.map((item, key1) => (
             <Menu.Item key={key1} >
                 {
                     ({ active }) => {
-                        return <div onClick={() => setSelectTec(item.id)}>
+                        return <div onClick={() => handleCurrentTec(item)}>
                             <Typography
                                 className={classNames(
                                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
@@ -60,13 +62,13 @@ export default function ListTecHoy() {
                     </Menu.Items>
                 </Transition>
             </Menu>
-            <Typography
+            {/* <Typography
                 // as="text"
                 variant="small"
                 className="mr-4 cursor-pointer py-1.5 font-normal"
             >
                 {selectTec}
-            </Typography>
+            </Typography> */}
         </div>
     )
 }
