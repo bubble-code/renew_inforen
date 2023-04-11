@@ -1,16 +1,18 @@
 import { Navbar, Button, Typography } from "@material-tailwind/react"
 import ListTecHoy from "../ListTecHoy/ListTecHoy";
 import { useState } from "react";
+import { useGetTecnicosQuery } from "../../redux/Api/firebase-api-main";
 
 const BarCargar = () => {
 
     const [current, setCurrent] = useState({})
+    const { data = [], isLoading } = useGetTecnicosQuery()
     return (
         <div className="flex flex-col">
             <Navbar className="py-2 px-4 lg:px-8 lg:py-4 text-gray-950">
                 <div className="container mx-auto flex items-center justify-between">
                     <div className="flex w-64 justify-around items-center">
-                        <ListTecHoy current={setCurrent} />
+                        <ListTecHoy current={setCurrent} listRender={data} />
                         <Typography
                             variant="small"
                             color="blue-gray"
@@ -39,64 +41,6 @@ const BarCargar = () => {
                     </div>
                 </div>
             </Navbar>
-            <form className="w-full flex gap-4 mt-4">
-                <div className="flex flex-col">
-                    <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="p-1 font-normal"                    >
-                        Details
-                    </Typography>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        required
-
-                    />
-                </div>
-                <div className="flex flex-col">
-                    <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="p-1 font-normal"                    >
-                        Details
-                    </Typography>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        required
-
-                    />
-                </div>
-                <div className="flex flex-col">
-                    <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="p-1 font-normal"                    >
-                        Details
-                    </Typography>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        required
-
-                    />
-                </div>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    required
-
-                />
-            </form>
         </div>
     )
 }
