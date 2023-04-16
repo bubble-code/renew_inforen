@@ -8,13 +8,12 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function ListTecHoy({ current }) {
-    const { data = [], isFetching } = useGetTecnicosQuery()
+export default function ListSelect({ current, listRender }) {
     const handleCurrentTec = (tec) => {
         current(tec)
     }
     const renderListTec = () => {
-        return data.map((item, key1) => (
+        return listRender.map((item, key1) => (
             <Menu.Item key={key1} >
                 {
                     ({ active }) => {
