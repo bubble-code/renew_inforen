@@ -12,8 +12,11 @@
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.17",
     "@material-tailwind/react": "^1.4.2",
+    "@react-google-maps/api": "^2.18.1",
     "@reduxjs/toolkit": "^1.9.3",
+    "@tanstack/react-table": "^8.8.5",
     "firebase": "^9.19.1",
+    "google-map-react": "^2.2.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "moment": "^2.29.4",
@@ -21,7 +24,10 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
-    "sort-by": "^1.2.0"
+    "react-table": "^7.8.0",
+    "react-table-ui": "^0.1.6",
+    "sort-by": "^1.2.0",
+    "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

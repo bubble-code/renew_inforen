@@ -9,7 +9,6 @@ function classNames(...classes) {
 }
 
 export default function ListSelect({ current, listRender }) {
-    const { data = [], isFetching } = useGetTecnicosQuery()
     const handleCurrentTec = (tec) => {
         current(tec)
     }
