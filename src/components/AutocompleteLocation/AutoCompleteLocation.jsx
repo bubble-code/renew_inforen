@@ -42,7 +42,7 @@ export const AutocompleteLocations = () => {
         const { description } = suggestion
         const coorderna = await getGeocode({ address: description })
         const { lat, lng } = await getLatLng(coorderna[0])
-        setListLocations((oldLocatio) => [...oldLocatio, { lat, lng }])
+        setListLocations((oldLocatio) => [...oldLocatio, { lat, lng, description }])
         // console.log(lat, lng)
     }
 
@@ -63,7 +63,7 @@ export const AutocompleteLocations = () => {
                     // value={value}
                     onChange={handleSearch}
                     required
-                    disabled={!ready}
+                // disabled={!ready}
                 />
                 {status === 'OK' && <ul className='absolute z-10 bg-slate-700 rounded shadow-md mt-10 ml-2 p-4'>{renderSuggestion()}</ul>}
             </div>

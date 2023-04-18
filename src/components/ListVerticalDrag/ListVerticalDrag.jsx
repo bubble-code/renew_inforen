@@ -1,14 +1,20 @@
-import { useState } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { useState } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import useHookLocation from "../../Contex/hook";
 
+const getList = (lst) => {
+    lst.map((item, idx) => (
+        {
+            id: idx, content: item
+        }
+    )
+    )
+}
 
-export const ListVerticalDrag = () => {
-    const [items, setItems] = useState([
-        { id: "item-1", content: "Item 1" },
-        { id: "item-2", content: "Item 2" },
-        { id: "item-3", content: "Item 3" },
-        { id: "item-4", content: "Item 4" },
-    ]);
+export function ListVerticalDrag() {
+    const { listLocations } = useHookLocation()
+    // const [items, setItems] = useState([]);
+    // console.log(listLocations);
 
     function onDragEnd(result) {
         if (!result.destination) return;
@@ -19,8 +25,9 @@ export const ListVerticalDrag = () => {
 
         setItems(newItems);
     }
+
     return (
-        <div class=" text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white overflow-hidden">
+        <div className="overflow-x-hidden">
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="vertical-list">
                     {(provided, snapshot) => (
@@ -29,8 +36,8 @@ export const ListVerticalDrag = () => {
                             ref={provided.innerRef}
                             className="divide-y divide-gray-200"
                         >
-                            {items.map((item, index) => (
-                                <Draggable key={item.id} draggableId={item.id} index={index}>
+                            {listLocations.map((item, index) => (
+                                <Draggable key={item.id} draggableId={item.description} index={index}>
                                     {(provided, snapshot) => (
                                         <li
                                             ref={provided.innerRef}
@@ -39,7 +46,7 @@ export const ListVerticalDrag = () => {
                                             className={`p-4 ${snapshot.isDragging && "bg-gray-100"
                                                 }`}
                                         >
-                                            {item.content}
+                                            {item.description}
                                         </li>
                                     )}
                                 </Draggable>
@@ -50,5 +57,7 @@ export const ListVerticalDrag = () => {
                 </Droppable>
             </DragDropContext>
         </div>
-    )
+    );
 }
+
+
