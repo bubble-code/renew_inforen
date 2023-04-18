@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-export const ListTaskToDay = () => {
+export const ListVertical = () => {
     return (
 
         <div class="w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">

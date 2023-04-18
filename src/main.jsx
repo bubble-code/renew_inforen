@@ -6,11 +6,14 @@ import './index.css'
 import AuthProvider from './routers/authProvider'
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import {LocationProvider} from './Contex/locationContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <LocationProvider>
+        <RouterProvider router={router} />
+      </LocationProvider>
     </AuthProvider>
   </Provider>
 )

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import BarOptHoy from '../components/BarOptHoy/BarOptHoy'
 import { Typography } from '@material-tailwind/react';
 import moment from 'moment';
-import { ListTaskToDay } from '../components/ListTaskHoy/ListTaskToDay';
+import { ListVertical } from '../components/ListVertical/ListVertical';
 
 const Hoy = () => {
     const [currentTec, setCurrentTec] = useState({ nane: '' })
@@ -10,7 +10,7 @@ const Hoy = () => {
     const fecha = moment()
     return (
         <div className='py-6'>
-            <BarOptHoy current={setCurrentTec} /> 
+            <BarOptHoy current={setCurrentTec} />
             <div className="container mx-auto py-4">
                 <div className="flex flex-wrap -mx-4">
                     <div className="w-full md:w-1/3 px-4">
