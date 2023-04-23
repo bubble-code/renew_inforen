@@ -9,7 +9,7 @@ import useHookLocation from '../../Contex/hook';
 
 export const RenderMap = () => {
     const apiKey = import.meta.env.VITE_APP_PUBLIC_GOOGLE_MAPS_API_KEY;
-    const { listLocations, } = useHookLocation();
+    const { listLocations } = useHookLocation();
     // console.log(apiKey)
     const center = useMemo(() => ({ lat: 40.4095251787395, lng: -3.700199945222827 }))
     const { isLoaded } = useLoadScript({
@@ -19,7 +19,7 @@ export const RenderMap = () => {
     })
 
     if (!isLoaded) {
-        return <div>Loacing...</div>
+        return <div>Loading...</div>
     }
 
 
@@ -29,7 +29,8 @@ export const RenderMap = () => {
             mapContainerClassName='map'
             center={center}
         >
-            {listLocations.map((location) => <Marker position={location} shape={'circle'} />)}
+            {Object.keys(listLocations).map((key, idx) => listLocations[key].map((location) => <Marker position={location} shape={'circle'} />))}
+            {/* {listLocations.map((location, idx) => <Marker position={location} shape={'circle'} />)} */}
         </GoogleMap>
     )
 }

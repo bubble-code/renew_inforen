@@ -68,9 +68,11 @@ button:focus-visible {
   }
 } */
 
+@import '@fortawesome/fontawesome-free/css/all.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 .flex-2 {
   flex-grow: 2;
