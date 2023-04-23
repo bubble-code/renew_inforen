@@ -32,10 +32,15 @@ const Cargar = () => {
     return (
         <div className='py-6 flex flex-col'>
 
-            <AutocompleteLocations />
             <div className="flex w-full min-w-0 overflow-hidden gap-2">
-                <div className="flex-1 overflow-x-hidden border border-red-400" >
-                    <ListVerticalDrag />
+                <div className="flex-1 overflow-x-hidden flex flex-col justify-between" >
+                    <div>
+                        <AutocompleteLocations />
+                        <ListVerticalDrag />
+                    </div>
+                    <div>
+                        <Button>Hola</Button>
+                    </div>
                 </div>
                 <div className="flex-2 h-full">
                     <RenderMap />

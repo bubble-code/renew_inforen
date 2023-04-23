@@ -4,7 +4,7 @@ const LocationsContext = createContext(null);
 LocationsContext.displayName = "ListLocations"
 
 export const LocationProvider = ({ children }) => {
-    const [listLocations, setListLocations] = useState([])
+    const [listLocations, setListLocations] = useState({ 1: [] })
     // const value = useMemo(() => [listLocations, setListLocations], [listLocations, setListLocations])
 
     return (
