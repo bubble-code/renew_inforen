@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^1.9.3",
     "@tanstack/react-table": "^8.8.5",
     "firebase": "^9.19.1",
+    "geolib": "^3.3.3",
     "google-map-react": "^2.2.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",

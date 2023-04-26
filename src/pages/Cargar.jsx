@@ -7,12 +7,15 @@ import { RenderMap } from "../components/Map/RenderMap";
 import { AutocompleteLocations } from "../components/AutocompleteLocation/AutoCompleteLocation";
 import LocationProvider from "../Contex/locationContext";
 import { ListVerticalDrag } from "../components/ListVerticalDrag/ListVerticalDrag";
+import useHookLocation from "../Contex/hook";
+import * as geolib from 'geolib';
 
 // import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete'
 
 
 const Cargar = () => {
     const { addLocation, locations, deleteRow } = useLocationsAPI()
+    const { listLocations, setListLocations } = useHookLocation()
     const locationRef = useRef(null)
 
     // const { ready, value, setValue, suggestions: { status, data }, clearSuggestions } = usePlacesAutocomplete({
@@ -27,7 +30,30 @@ const Cargar = () => {
         }
         // addLocation(e.target.value)
     }
-    // console.log(data)
+
+    const handleReordenar = () => {
+        const grupos = Object.values(listLocations).flatMap(locatio => locatio.map(item => ({ latitude: item.lat, longitude: item['lng'], description: item['description'] })))
+        console.log(...grupos)
+
+        let key = 0
+        const result = []
+        console.log(grupos.length)
+        while ((grupos.length > 0) && (grupos.length > 3)) {
+            let lugar = grupos.pop();
+            console.log(lugar)
+            const grupo = [lugar];
+            for (let i = 0; i < 3; i++) {
+                let closest = geolib.findNearest(lugar, grupos)
+                console.log(closest)
+                grupo.push(closest);
+                grupos.splice(grupos.indexOf(closest), 1);
+                lugar = closest;
+            }
+            result[key] = grupo;
+            key++
+        }
+        console.log(result)
+    }
 
     return (
         <div className='py-6 flex flex-col'>
@@ -39,7 +65,7 @@ const Cargar = () => {
                         <ListVerticalDrag />
                     </div>
                     <div>
-                        <Button>Hola</Button>
+                        <Button onClick={() => handleReordenar()}>Hola</Button>
                     </div>
                 </div>
                 <div className="flex-2 h-full">
